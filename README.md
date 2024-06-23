@@ -1,7 +1,7 @@
 ## Simple Recommenation Engine
 
 
-### 데이터셋
+### Dataset
 - [Kaggle: Anime Recommendation Database 2020](https://www.kaggle.com/datasets/hernan4444/anime-recommendation-database-2020)
     - anime.csv
     - anime_with_synopsis.csv
@@ -13,7 +13,7 @@
 - [Kaggle: Webtoon Comics Dataset](https://www.kaggle.com/datasets/swarnimrai/webtoon-comics-dataset)
 ---
 
-### 개요
+### Overview
 - 본 프로젝트는 사용자의 애니메이션 경험에 기반하여 사용자가 흥미로울만한 웹툰을 추천하는 엔진이다. 이 추천 시스템은 단순히 정수형태의 사용자의 ID를 받아 해당 사용자에게 웹툰을 추천한다. 애니메이션 데이터 내의 사용자가 Rating 9점 이상을 준 애니메이션 정보를 활용하여 웹툰의 정보와 코사인 유사도를 측정, 유사한 웹툰을 추천하는 서비스이다.
 
 ### Techical Stack
@@ -34,7 +34,7 @@
 - API: 간단한 Serving 및 데이터 전송을 위해 빠른 API 구현에 최적화된 FASTAPI를 사용
 - 사용자 인터페이스: 프로로타입 시험을 위해 간단히 프론트엔드 기능을 구현할 수 있는 Streamlit을 사용
 
-### 해결 과제
+### Problem Statement
 - 문제점: 웹툰 데이터에는 아이디, 작가, 장르, 평가, 구독, 요약문 등이 포함되어 있지만, 어떤 사용자가 어떻게 평가했는지에 대한 데이터가 없어 사용자 경험을 반영한 추천 모델을 만들기가 어려움.
 - 해결 방안: 애니메이션 데이터에는 사용자 경험이 포함되어 있음. 웹툰과 애니메이션의 경우 미디어는 다르지만, 웹툰이 애니메이션화가 되기도 하듯, 장르 컨텐츠의 유사성이 존재하기 때문에 특정 장르의 애니메이션을 선호하는 사용자가 비슷한 장르의 웹툰을 선호할 것이라는 가설을 세울 수 있음.
 - 구현 방안: 임베딩 모델을 통해 애니메이션 데이터에 대한 Description을 학습하고, 이와 유사하게 웹툰의 데이터에 대한 Description을 학습하여, 두 개의 임베딩 데이터를 구축하여, 임베딩 데이터 간의 유사성을 계산하여 애니메이션과 웹툰과의 유사성을 측정할 수 있음.
@@ -84,7 +84,7 @@ Python: 3.11.9 and Install on your system requirements.txt.
 <img src="./assets/image-1.png" width="500" height="500">
 </p>
 
-### 한계점
+### Limitations
 - 경량화 모델 기반의 임베딩이지만 최적화 문제로 추천까지 실행시간이 다소 있음.
 - 웹툰과 애니메이션 데이터의 언어가 영어로 되어 있어 한국어 명령 등 사용이 어려움.
 - 애니메이션의 데이터가 웹툰에 비해 비대하고 장르 구분 등 보다 구체적인 설명이 애니메이션 데이터에는 제공되고 있지만 웹툰 데이터에 대해서는 상대적으로 적은 정보가 존재.
