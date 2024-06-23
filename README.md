@@ -19,6 +19,18 @@
 ### Techical Stack
 - 추천 모델: Hugging Face의 Sentens-Transformer에서 제공하는 임베더를 활용하며 그 중에서 간단한 `paraphrase-distilroberta-base-v1`를 활용하여 임베딩을 수행하여 유사도 기반으로 웹툰을 추천
     - OpenAI의 클로즈드 임베딩과 그 외 다양한 오픈소스 임베딩 모델을 사용할 수 있지만, 데이터의 규모가 크지 않기 때문에 경량화된 모델을 선택하고, 문장 유사도 계산이 용이한 `paraphrase-distilroberta-base-v1`를 사용.
+    - 문장은 Pandas DataFrame에서 아래와 같은 방식으로 생성한다.
+    ```python
+    def get_webtoon_description(row):
+    # Create description for one row
+    description = (
+        f"{row['Name']} has a subscribers {row['Subscribers']}. \n" 
+        f"Summary: {row['Summary']}.\n"
+        f"It was produced by {row['Writer']}.\n"
+        f"Its genres are {row['Genre']}.\n"
+    )
+    return clean_text(description)
+    ```
 - API: 간단한 Serving 및 데이터 전송을 위해 빠른 API 구현에 최적화된 FASTAPI를 사용
 - 사용자 인터페이스: 프로로타입 시험을 위해 간단히 프론트엔드 기능을 구현할 수 있는 Streamlit을 사용
 
