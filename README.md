@@ -1,4 +1,4 @@
-## LLM Based Simple Recommenation Engine
+## Simple Recommenation Engine
 
 
 ### 데이터셋
