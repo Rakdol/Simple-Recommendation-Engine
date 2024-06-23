@@ -6,7 +6,7 @@ import json
 
 def main():
     st.title("AI Webtoon Recommender 🤖")
-    st.image("dataset-cover.jpg")
+    st.image("../assets/dataset-cover.jpg")
 
     st.markdown("## Select the User ID for recommending some interesting webtoon!")
     user_input = st.number_input("Insert a number (Range 0 to 353404)", min_value=0 , max_value=353404, value=5, step=1)

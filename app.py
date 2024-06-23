@@ -9,6 +9,26 @@ from config import DataIngestionConfig
 
 from utils import *
 
+class UserData(BaseModel):
+    user_data: int
+
+class Recommendation(BaseModel):
+    anime_key: list
+    webtoon_key: list
+    webtoon_score: list
+    
+class AnimeData(BaseModel):
+    user_id_list: list
+
+class Animation(BaseModel):
+    anime_data: Any
+
+class WebtoonData(BaseModel):
+    webtoon_id_list: list
+    
+class Webtoon(BaseModel):
+    webtoon_data: Any
+
 def get_data(config:DataIngestionConfig) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
     webtoon_data = pd.read_csv(config.webtoon_data_path)
     rating_data = pd.read_csv(config.rating_data_path)
@@ -36,14 +56,6 @@ data_config = DataIngestionConfig()
 webtoon, rating, anime = get_data(data_config)
 anime_embeddings, webtoon_embeddings = get_embeddings(data_config)
 
-class UserData(BaseModel):
-    user_data: int
-
-class Recommendation(BaseModel):
-    anime_key: list
-    webtoon_key: list
-    webtoon_score: list
-
 @app.post("/recommend", response_model=Recommendation)
 def recommend_webtoon(user_data: UserData):
         
@@ -55,19 +67,6 @@ def recommend_webtoon(user_data: UserData):
                "webtoon_score": items["webtoon_score"]}
     
     return results
-
-class AnimeData(BaseModel):
-    user_id_list: list
-
-class Animation(BaseModel):
-    anime_data: Any
-
-class WebtoonData(BaseModel):
-    webtoon_id_list: list
-    
-class Webtoon(BaseModel):
-    webtoon_data: Any
-
 
 @app.post("/anime", response_model=Animation)
 def anime_data(user_id_list:AnimeData):
