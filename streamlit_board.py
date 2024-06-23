@@ -32,7 +32,7 @@ def main():
     st.title("AI Webtoon Recommender 🤖")
     st.image("./assets/dataset-cover.jpg")
 
-    st.markdown("## Select the User ID for recommending some interesting webtoon!")
+    st.markdown("### Select your ID to receive recommendations for interesting webtoons!")
     user_input = st.number_input("Insert a number (Range 0 to 353404)", min_value=0 , max_value=353404, value=5, step=1)
     st.write("The current number is ", user_input)
     if st.button("Recommend Webtoons"):
