@@ -17,7 +17,7 @@
 - 본 프로젝트는 사용자의 애니메이션 경험에 기반하여 사용자가 흥미로울만한 웹툰을 추천하는 엔진이다. 이 추천 시스템은 단순히 정수형태의 사용자의 ID를 받아 해당 사용자에게 웹툰을 추천한다. 애니메이션 데이터 내의 사용자가 Rating 9점 이상을 준 애니메이션 정보를 활용하여 웹툰의 정보와 코사인 유사도를 측정, 유사한 웹툰을 추천하는 서비스이다.
 
 ### Techical Stack
-- 추천 모델: Hugging Face의 Sentens-Transformer에서 제공하는 임베더를 활용하며 그 중에서 간단한 `paraphrase-distilroberta-base-v1`를 활용하여 임베딩을 수행하여 유사도 기반으로 웹툰을 추천
+- 추천 모델: Hugging Face의 Sentence-Transformer에서 제공하는 임베더를 활용하며 그 중에서 간단한 `paraphrase-distilroberta-base-v1`를 활용하여 임베딩을 수행하여 유사도 기반으로 웹툰을 추천
     - OpenAI의 클로즈드 임베딩과 그 외 다양한 오픈소스 임베딩 모델을 사용할 수 있지만, 데이터의 규모가 크지 않기 때문에 경량화된 모델을 선택하고, 문장 유사도 계산이 용이한 `paraphrase-distilroberta-base-v1`를 사용.
     - 문장은 Pandas DataFrame에서 아래와 같은 방식으로 생성한다.
     ```python
