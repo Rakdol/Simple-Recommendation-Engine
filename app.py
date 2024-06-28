@@ -78,7 +78,7 @@ def anime_data(user_id_list:AnimeData):
     
 
 @app.post("/webtoon", response_model=Webtoon)
-def anime_data(webtoon_id_list:WebtoonData):
+def webtoon_data(webtoon_id_list:WebtoonData):
     id_list = webtoon_id_list.webtoon_id_list
 
     item = webtoon[webtoon["id"].isin(id_list)].to_dict()

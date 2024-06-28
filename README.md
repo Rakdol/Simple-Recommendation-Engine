@@ -5,7 +5,7 @@
 - [Kaggle: Anime Recommendation Database 2020](https://www.kaggle.com/datasets/hernan4444/anime-recommendation-database-2020)
     - anime.csv
     - anime_with_synopsis.csv
-    - The above two datasets are merged by using 
+    - 위 두 데이턴는 아래 코드를 통해 조인하여 사용
     
     ```python
     merged_anime = pd.merge(anime_with_synopsis, anime, how="left").dropna()
