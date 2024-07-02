@@ -86,6 +86,31 @@ Python: 3.11.9 and Install on your system requirements.txt.
 
 ### Limitations
 - 경량화 모델 기반의 임베딩이지만 최적화 문제로 추천까지 실행시간이 다소 있음.
+    - logging을 통해 함수 실행시간 계산
+    - cosine_similarity 는 충분히 빠르다
+    - get_simliar_animes에 의해서 속도가 지연되는 것으로 확인
+    ```log
+    INFO - Execution time for get_preferred_anime_from_user: 0.1072 seconds
+    INFO - Execution time for get_simliar_animes: 0.8657 seconds
+    INFO - Execution time for cosine_similarity: 0.1021 seconds
+    INFO - Execution time for get_relevant_webtoons: 0.9707 seconds
+    INFO - Execution time for get_simliar_animes: 0.8825 seconds
+    INFO - Execution time for cosine_similarity: 0.0901 seconds
+    INFO - Execution time for get_relevant_webtoons: 0.9755 seconds
+    INFO - Execution time for get_recommenations: 1.9463 seconds
+    ```
+    - 타겟 애니메에 대해서만 유사도 계산, numpy 활용을 통한 속도 개선
+    ```log
+    INFO - Execution time for get_preferred_anime_from_user: 0.1166 seconds
+    INFO - Execution time for get_simliar_animes: 0.0439 seconds
+    INFO - Execution time for cosine_similarity: 0.0732 seconds
+    INFO - Execution time for get_relevant_webtoons: 0.1196 seconds
+    INFO - Execution time for get_simliar_animes: 0.0453 seconds
+    INFO - Execution time for cosine_similarity: 0.0712 seconds
+    INFO - Execution time for get_relevant_webtoons: 0.1214 seconds
+    INFO - Execution time for get_recommenations: 0.2410 seconds
+    ```
+
 - 웹툰과 애니메이션 데이터의 언어가 영어로 되어 있어 한국어 명령 등 사용이 어려움.
 - 애니메이션의 데이터가 웹툰에 비해 비대하고 장르 구분 등 보다 구체적인 설명이 애니메이션 데이터에는 제공되고 있지만 웹툰 데이터에 대해서는 상대적으로 적은 정보가 존재.
 - 정보량의 비대칭성으로 유사도가 높게 나와도 정말 유사한지에 대한 의문이 있음. 
