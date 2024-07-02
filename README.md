@@ -65,7 +65,7 @@ Python: 3.11.9 and Install on your system requirements.txt.
     1. git clone https://github.com/Rakdol/Simple-Recommendation-Engine.git
     2. 프로젝트 폴더로 이동
     3. pip install -r requirements.txt
-
+    4. Kaggle에서 다운 받은 데이터를 프로젝트의 data 폴더 내에 anime_merged.csv, rating_complete.csv, Webtoon Dataset.csv 저장
 - Running FASTAPI
     - 코드상에 디폴트 포트가 5020으로 지정, 편의에 따라 수정 가능
     ```bash
