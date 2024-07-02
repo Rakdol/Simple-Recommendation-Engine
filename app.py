@@ -2,7 +2,7 @@ from typing import Any
 import numpy as np
 import pandas as pd
 import requests
-
+from pydantic import BaseModel
 from fastapi import FastAPI, HTTPException
 from fastapi.encoders import jsonable_encoder
 from config import DataIngestionConfig
@@ -44,7 +44,7 @@ def get_embeddings(config:DataIngestionConfig) -> tuple[np.array, np.array]:
 
 
 def get_response(user_id:int):
-    preferred_animes = get_preferred_anime_from_user(user_id, rating)[:2] # Reduce search
+    preferred_animes = get_preferred_anime_from_user(user_id, rating)[:2] # 2 is used to reduce recommenation space
     
     top_itmes = get_recommenations(webtoon, anime, preferred_animes, anime_embeddings, webtoon_embeddings)
     return top_itmes
@@ -61,7 +61,7 @@ def recommend_webtoon(user_data: UserData):
         
     data = user_data.user_data
     items = get_response(data)
-    print(items)
+    # print(items)
     results = {"anime_key": items["anime_key"], 
                "webtoon_key": items["webtoon_key"], 
                "webtoon_score": items["webtoon_score"]}
@@ -76,13 +76,12 @@ def anime_data(user_id_list:AnimeData):
     results = {"anime_data": item}
     return results
     
-
 @app.post("/webtoon", response_model=Webtoon)
 def webtoon_data(webtoon_id_list:WebtoonData):
     id_list = webtoon_id_list.webtoon_id_list
 
     item = webtoon[webtoon["id"].isin(id_list)].to_dict()
-    print(item)
+    # print(item)
     results = {"webtoon_data": item}
     return results
     
