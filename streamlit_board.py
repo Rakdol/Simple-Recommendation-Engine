@@ -11,13 +11,13 @@ def get_recommend_response(user_input: int) -> dict:
     response = {"messages": [reply.json()]}
     return response
 
-def get_anime_data(anime_user_id_list:list):
+def get_anime_data(anime_user_id_list:list) -> dict:
     endpoint = "http://127.0.0.1:5020/anime"
     reply = requests.post(endpoint, json={"user_id_list": anime_user_id_list})
     response = {"messages": [reply.json()]}
     return response
 
-def get_webtoon_data(recommened_webtoon_id_list:list):
+def get_webtoon_data(recommened_webtoon_id_list:list) -> dict:
     endpoint = "http://127.0.0.1:5020/webtoon"
     reply = requests.post(endpoint, json={"webtoon_id_list": recommened_webtoon_id_list})
     response = {"messages": [reply.json()]}
