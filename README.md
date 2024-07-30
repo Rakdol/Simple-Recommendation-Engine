@@ -47,12 +47,13 @@ sequenceDiagram
     participant FastAPI
     participant RecommendationFunction
 
-    User->>Streamlit: 사용자 ID 입력
-    Streamlit->>FastAPI: 사용자 ID 전달
-    FastAPI ->> RecommendationFunction: 사용자 ID 및 데이터 전달
-    RecommendationFunction ->> RecommendationFunction: 애니메이션과 웹툰 데이터와의 코사인 유사도 계산
-    RecommendationFunction ->> RecommendationFunction: 애니메이션 데이터 셋의 사용자 ID의 선호에 따라 웹툰 추천
-    RecommendationFunction-->>FastAPI: 추천 웹툰 반환
+    User->>Streamlit: 사용자 ID 및 검색 쿼리 입력
+    Streamlit->>FastAPI: 사용자 ID 및 검색 쿼리 전송
+    FastAPI ->> RecommendationFunction : 사용자 ID와 VectorDB 검색을 위한 쿼리 전달
+    RecommendationFunction ->> RecommendationFunction: 유사도 기반의 추천과 검색 기반의 동시 추천
+    FastAPI ->> RecommendationFunction:  VectorDB 검색을 위한 쿼리 전달
+    RecommendationFunction ->> RecommendationFunction: 검색 기반의 추천 
+    RecommendationFunction-->>FastAPI: 추천 웹툰 결과 반환
     FastAPI-->>Streamlit: 추천 웹툰 전송
     Streamlit-->>User: 추천 웹툰 디스플레이
 ```
@@ -113,5 +114,4 @@ Python: 3.11.9 and Install on your system requirements.txt.
 
 - 웹툰과 애니메이션 데이터의 언어가 영어로 되어 있어 한국어 명령 등 사용이 어려움.
 - 애니메이션의 데이터가 웹툰에 비해 비대하고 장르 구분 등 보다 구체적인 설명이 애니메이션 데이터에는 제공되고 있지만 웹툰 데이터에 대해서는 상대적으로 적은 정보가 존재.
-- 정보량의 비대칭성으로 유사도가 높게 나와도 정말 유사한지에 대한 의문이 있음. 
-- 현재 단순하게 사용자의 ID 만을 입력을 받도록 되어 있지만, 향 후 장르에 대한 설명 등의 자연어 처리와 VectorDB와 RAG를 통한 시맨틱 검색을 활용하면 파인튜닝 없이도 보다 범용적인 추천을 구현할 수도 있을 것으로 예상.
+- 현재 단순하게 사용자의 ID 만을 입력을 받도록 되어 있지만, 향 후 장르에 대한 설명 등의 자연어 처리와 VectorDB와 RAG를 통한 시맨틱 검색을 활용하면 파인튜닝 없이도 보다 범용적인 추천을 구현할 수도 있을 것으로 예상 (Faiss 기반의 VectorDB 및 간단한 RAG 구현)
