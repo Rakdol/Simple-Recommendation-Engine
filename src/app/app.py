@@ -42,7 +42,6 @@ def embed_query(query_text) -> np.array:
     return query_embedding.cpu().numpy()
 
 def get_response_with_query(user_id:int, query:str)->dict:
-    # 질의 임베딩
     query_embedding = embed_query(query)
 
     # RAG 기반 검색 수행
@@ -64,7 +63,7 @@ def get_response_only_query(query:str) -> dict:
     # 질의 임베딩
     query_embedding = embed_query(query)
 
-    # RAG 기반 검색 수행
+    # RAG Search
     k = 5  # 상위 5개의 유사한 항목을 검색
     webtoon_distances, webtoon_indices = webtoon_index.search(np.array([query_embedding]), k)
 
@@ -144,23 +143,7 @@ def webtoon_data(webtoon_id_list:WebtoonIn):
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=5020)
-    # data_config = DataIngestionConfig()
 
-    # webtoon, rating, anime = get_data(data_config)
-    # anime_embeddings, webtoon_embeddings = get_embeddings(data_config)
-
-    # model = SentenceTransformer('paraphrase-distilroberta-base-v1')
-    # model.max_seq_length = 384
-
-    # webtoon_index = faiss.IndexFlatL2(webtoon_embeddings.shape[1])
-    # webtoon_index.add(webtoon_embeddings)
-
-    # animation_index = faiss.IndexFlatL2(anime_embeddings.shape[1])
-    # animation_index.add(anime_embeddings)
-    # user_id = 5
-    # query = "Recommend highly rated and subscribed action webtoon"
-    # items = get_response_with_query(user_id, query)
-    # print(items)
             
 
 
