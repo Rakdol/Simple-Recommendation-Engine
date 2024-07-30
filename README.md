@@ -69,20 +69,22 @@ Python: 3.11.9 and Install on your system requirements.txt.
     4. Kaggle에서 다운 받은 데이터를 프로젝트의 data 폴더 내에 anime_merged.csv, rating_complete.csv, Webtoon Dataset.csv 저장
 - Running FASTAPI
     - 코드상에 디폴트 포트가 5020으로 지정, 편의에 따라 수정 가능
+    - src/app에서 fastapi 실행
     ```bash
     uvicorn app:app --reload --port=5020
     ```
 - Running Streamlit
     - 포트는 편의에 따라 수정 가능
     ```bash
-    streamlit run streamlit_board.py --server.port 8002  
+    streamlit run main.py --server.port 8002  
     ```
 - ScreenShot:
-    - 단순한 정수 ID 기반의 데이터 입력
+    - 사용자 ID와 검색 쿼리 기반의 웹툰 추천
     - ID에 맞는 웹툰 추천 및 추천의 소스가 된 애니메이션 목록 표출
+    - 검색 쿼리 기반의 웹툰 추천
+    - 상위 5개의 웹툰 목록 표출
 <p align="center">
-<img src="./assets/image.png" width="500" height="500">
-<img src="./assets/image-1.png" width="500" height="500">
+<img src="./assets/animation.gif" width="500" height="500">
 </p>
 
 ### Limitations
