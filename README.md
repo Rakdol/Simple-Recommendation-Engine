@@ -84,7 +84,7 @@ Python: 3.11.9 and Install on your system requirements.txt.
     - 검색 쿼리 기반의 웹툰 추천
     - 상위 5개의 웹툰 목록 표출
 <p align="center">
-<img src="./assets/Animation.gif" width="500" height="500">
+<img src="./assets/Animation.gif" width="500" height="800">
 </p>
 
 ### Limitations
