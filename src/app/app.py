@@ -77,12 +77,7 @@ data_config = DataIngestionConfig()
 webtoon, rating, anime = get_data(data_config)
 anime_embeddings, webtoon_embeddings = get_embeddings(data_config)
 
-model_path = '/app/model'
-if not os.path.exists(model_path):
-    model = SentenceTransformer('paraphrase-distilroberta-base-v1')
-    model.save(model_path)
-else:
-    model = SentenceTransformer(model_path)
+model = SentenceTransformer(model_path)
 model.max_seq_length = 384
 
 webtoon_index = faiss.IndexFlatL2(webtoon_embeddings.shape[1])
